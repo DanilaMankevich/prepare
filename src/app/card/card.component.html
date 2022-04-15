@@ -1,0 +1,58 @@
+<div class="card">
+  <!--  <h2 [ngStyle]="{color: 'blue'}" }>{{ title }}</h2>-->
+  <!-- статическая директива -->
+
+  <h2
+    [ngStyle]="{
+      color: title.length < 5 ? 'blue' : 'red',
+      fontWeight: title.length < 7 ? 'normal' : 'bold'
+    }"
+  >
+    <!-- динамическая директива -->
+    {{ title }}
+  </h2>
+
+  <div>
+    <button (click)="textColor = 'blue'">set blue</button>
+    <button (click)="textColor = 'green'">set green</button>
+    <button (click)="textColor = 'red'">set red</button>
+  </div>
+
+  <p
+    class="text"
+    [ngClass]="{
+      blue: textColor === 'blue',
+      green: textColor === 'green',
+      red: textColor === 'red'
+    }"
+  >
+    {{ text }}
+  </p>
+  <strong>Number: {{ age }}</strong>
+  <em>{{ array }}</em>
+  <p>{{ obj | json }}</p>
+  <! -- пример простого pipe/иначе приведет к [object Object] -->
+  <pre>{{ obj | json }}</pre>
+  <p>{{ getInfo() }}</p>
+  <div><img [src]="imgUrl" /></div>
+  <! -- байндинг подтягивает динамическое значение переменной-->
+  <button [disabled]="disabled">button</button>
+  <div>
+    <button (click)="changeTitle()">
+      <!-- итерация от шаблона к ts -->
+      Change title
+    </button>
+    <button (click)="title = 'inline change'">Change title inline</button>
+  </div>
+  <!--  <div>-->
+  <!--    <input-->
+  <!--      type="text"-->
+  <!--      (input)="inputHandler($event)"-->
+  <!--      [value]="title"-->
+  <!--    />&lt;!&ndash; двойное связывание&ndash;&gt;-->
+  <!--    <input type="text" #myAge (input)="ageHandler(myAge.value)" [value]="age">-->
+  <!--  </div>-->
+  <div>
+    <input type="text" [(ngModel)]="title" (ngModelChange)="changeHandler()" />
+  </div>
+</div>
